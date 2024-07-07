@@ -20,6 +20,9 @@ void setup() {
   // Configure ESP hardware
   setup_hardware();
 
+  // Start web server
+  setup_server();
+
   // Set initial conditions
   current_relay = N_RELAYS - 1;
   t_prev_relay = millis();
@@ -30,17 +33,20 @@ void setup() {
 
 void loop() {
   unsigned long t = millis();
-  if (t > t_prev_relay + 1000) {
+  if (t > t_prev_relay + 3000) {
     set_relay(current_relay, false);
     current_relay++;
     if (current_relay >= N_RELAYS) {
       current_relay = 0;
     }
-    Serial.print("Relay ");
-    Serial.println(current_relay);
     set_relay(current_relay, true);
     t_prev_relay = t;
   }
 
   poll_ota();
+  poll_server();
+}
+
+uint8_t get_current_relay() {
+  return current_relay;
 }
