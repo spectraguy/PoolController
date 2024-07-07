@@ -1,0 +1,8 @@
+#ifndef WIFI_AUTH_H
+#define WIFI_AUTH_H
+
+const char *ssid = "..........";
+const char *password = "..........";
+const char* hostname = "......";
+
+#endif
