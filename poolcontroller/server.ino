@@ -3,7 +3,7 @@
 WebServer server(80);
 
 void handle_root() {
-  server.send(200, "text/plain", "Hello from Pool Controller!");
+  server.send(200, "text/html", "Hello from Pool Controller!<br><br><a href=\"relays/0/on\">Turn relay 0 on</a><br><a href=\"relays/0/off\">Turn relay 0 off </a>");
 }
 
 void handle_status() {
@@ -28,9 +28,23 @@ void handle_not_found() {
   server.send(404, "text/plain", msg);
 }
 
+void handle_relay0_on() {
+  set_relay(0, true);
+  String msg = "Relay 0 has been set on";
+  server.send(200, "text/html", msg);
+}
+
+void handle_relay0_off() {
+  set_relay(0, false);
+  String msg = "Relay has been set off";
+  server.send(200, "text/html", msg);
+}
+
 void setup_server() {
   server.on("/", handle_root);
   server.on("/status", handle_status);
+  server.on("/relays/0/on", handle_relay0_on);
+  server.on("/relays/0/off", handle_relay0_off);
 
   server.onNotFound(handle_not_found);
 

@@ -32,7 +32,7 @@ void setup() {
 }
 
 void loop() {
-  unsigned long t = millis();
+  /*unsigned long t = millis();
   if (t > t_prev_relay + 3000) {
     set_relay(current_relay, false);
     current_relay++;
@@ -41,7 +41,7 @@ void loop() {
     }
     set_relay(current_relay, true);
     t_prev_relay = t;
-  }
+  }*/
 
   poll_ota();
   poll_server();
